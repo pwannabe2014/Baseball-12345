@@ -19,21 +19,18 @@ def test_exception_when_invalid(game, invalid_input):
     assert_illegal_argument(game, invalid_input)
 
 
+def alert_matched_number(result, solved, strikes, balls):
+    assert result is not None
+    assert result.solved == solved
+    assert result.strikes == strikes
+    assert result.balls == balls
+
+
 def test_retrun_solved_result_if_matched_number(game):
     game.question = "123"
-    result: GameResult = game.guess("123")
-
-    assert result is not None
-    assert result._solved == True
-    assert result._strikes == 3
-    assert result._balls == 0
+    alert_matched_number(game.guess("123"), solved=True, strikes=3, balls=0)
 
 
 def test_return_solved_result_if_unmatched_number(game):
     game.question = "123"
-    result: GameResult = game.guess("456")
-
-    assert result is not None
-    assert result._solved == False
-    assert result._strikes == 0
-    assert result._balls == 0
+    alert_matched_number(game.guess("456"), solved=False, strikes=0, balls=0)

@@ -18,12 +18,8 @@ class Game:
         if guess_number == self._question:
             return GameResult(True, 3, 0)
         else:
-            strikes = 0
-            for i in range(3):
-                if guess_number[i] == self._question[i]:
-                    strikes += 1
-
-            balls = len(set(guess_number) & set(self._question))-strikes
+            strikes = sum(1 for g, q in zip(guess_number, self._question) if g == q)
+            balls = len(set(guess_number) & set(self._question)) - strikes
             return GameResult(False, strikes, balls)
 
     def _assert_illegal_value(self, guess_number):

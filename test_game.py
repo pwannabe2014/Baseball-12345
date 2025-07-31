@@ -20,3 +20,4 @@ def test_exception_when_invalid(game):
     assert_illegal_argument(game, None)
     assert_illegal_argument(game, "12")
     assert_illegal_argument(game, "1234")
+    assert_illegal_argument(game, "12s")
